@@ -18,7 +18,7 @@ export default function Layout({ children }) {
         <meta name="description" content="A Ecommerce site" key="description" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className="h-20 sticky z-10 bg-gray-100 top-0 border-b-2 border-gray-200 backdrop-filter flex flex-row px-4 justify-between items-center dark:bg-gray-700 dark:text-gray-100">
+      <header className="h-20 z-10 bg-gray-100 border-b-2 border-gray-200 backdrop-filter flex flex-row px-4 justify-between items-center">
         <h1 className="text-2xl font-bold font-mono md:text-4xl">VickZone</h1>
         <nav className="flex flex-row flex-nowrap">
           <Link href="/" passHref>
@@ -37,10 +37,10 @@ export default function Layout({ children }) {
           </Link>
         </nav>
       </header>
-      <div className="container m-auto dark:text-gray-100">
+      <div className="min-h-screen container m-auto">
         <div>{children}</div>
       </div>
-      <footer className="bg-gray-100 border-gray-200 flex flex-col dark:bg-gray-700 dark:text-gray-100">
+      <footer className="bg-gray-100 border-gray-200 flex flex-col">
         <h1
           className="text-2xl mt-2 ml-2 md:mt-4 md:ml-4 font-bold font-mono md:text-4xl cursor-pointer"
           onClick={() => router.push("/")}

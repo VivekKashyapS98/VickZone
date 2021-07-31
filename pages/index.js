@@ -1,71 +1,62 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import { data } from "../utils/data";
+import { useState } from "react";
+import Card from "../components/Card";
+import {
+  dataByName,
+  dataByPrice,
+  dataByCategory,
+  dataByAvailablity,
+} from "../utils/data";
 
 export default function Home() {
-  console.log(data);
+  const [list, setList] = useState(dataByName);
+  const [sort, setSort] = useState("name");
+
+  //set the list by sort order
+  const handleChange = (e) => {
+    setSort(e.target.value);
+    switch (e.target.value) {
+      case "name":
+        setList(dataByName);
+        break;
+      case "price":
+        setList(dataByPrice);
+        break;
+      case "category":
+        setList(dataByCategory);
+        break;
+      case "availablity":
+        setList(dataByAvailablity);
+        break;
+      default:
+        break;
+    }
+    console.log(dataByAvailablity, dataByCategory, dataByName, dataByPrice);
+  };
 
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>Home | VickZone</title>
-        <meta name="description" content=" Buy Anything" />
+        <meta property="og:title" content="Home | VickZone" key="title" />
+        <meta name="description" content="A Ecommerce site" key="description" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="m-2 md:m-4 flex flex-row flex-nowrap justify-center items-center">
+        <h3 className="text-base font-semibold md:text-lg">Sort By</h3>
+        <select
+          value={sort}
+          onChange={handleChange}
+          className="m-2 p-2 w-40 md:w-60 h-8 md:h-10 rounded-full bg-gray-100 transition-gpu duration-200 ring-gray-200 hover:ring-2 md:hover:ring-4"
         >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
+          <option value="name">Name</option>
+          <option value="price">Price</option>
+          <option value="category">Category</option>
+          <option value="availablity">Availablity</option>
+        </select>
+      </div>
+      {list.map((item, ind) => (
+        <Card key={`${item.name}/${ind}`} item={item} />
+      ))}
+    </>
   );
 }
