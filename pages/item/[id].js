@@ -7,15 +7,29 @@ import { dataByName } from "../../utils/data";
 export default function ID({ item }) {
   const [qty, setQty] = useState(item.available === 0 ? 0 : 1);
   const router = useRouter();
-  const { dispatch } = useContext(CartContext);
+  const { state, dispatch } = useContext(CartContext);
+
+  const contains = () => {
+    var found = false;
+    for (var i = 0; i < state.cart.length; i++) {
+      if (state.cart[i].id == item.id) {
+        found = true;
+        break;
+      }
+    }
+    console.log(found);
+    return found;
+  };
 
   const setQuantity = (e) => {
     setQty(e.target.value);
   };
 
   const handleAddToCart = () => {
-    dispatch({ type: "ADD", payload: { item: item, qty } });
-    router.push("/cart");
+    if (item.available !== 0) {
+      dispatch({ type: "ADD", payload: { item: item, qty } });
+      router.push("/cart");
+    }
   };
 
   return (
@@ -29,7 +43,7 @@ export default function ID({ item }) {
       </h3>
       <div className="p-4 w-full flex felx-row flex-wrap justify-between items-center">
         <h3 className="text-lg font-semibold md:text-2xl">
-          {item.available} left
+          {item.available ? "In Stock:" + item.available : "Out of stock"}
         </h3>
         <select
           value={qty}
@@ -45,7 +59,13 @@ export default function ID({ item }) {
             </>
           )}
         </select>
-        <Button onClick={handleAddToCart}>Add to cart</Button>
+        <div
+          style={{
+            opacity: contains() ? "0.5" : 1,
+          }}
+        >
+          <Button onClick={handleAddToCart}>Add to cart</Button>
+        </div>
       </div>
     </div>
   );

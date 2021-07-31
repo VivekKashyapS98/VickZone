@@ -3,11 +3,12 @@ import { CartContext } from "../utils/context";
 
 export default function Cart() {
   const { state, dispatch } = useContext(CartContext);
+  const { cart } = state;
 
   return (
     <div>
       <h3 className="text-lg text-center font-semibold md:text-3xl">Cart</h3>
-      {state.map((elem, ind) => {
+      {cart.map((elem, ind) => {
         return (
           <div
             key={`${elem.item.name}/${ind}`}
