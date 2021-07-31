@@ -1,37 +1,17 @@
 import Head from "next/head";
 import { useState } from "react";
+import sortObjectArray from "sort-objects-array";
 import Card from "../components/Card";
-import {
-  dataByName,
-  dataByPrice,
-  dataByCategory,
-  dataByAvailablity,
-} from "../utils/data";
+import { data } from "../utils/data";
 
 export default function Home() {
-  const [list, setList] = useState(dataByName);
+  const [list, setList] = useState(data);
   const [sort, setSort] = useState("name");
 
   //set the list by sort order
   const handleChange = (e) => {
     setSort(e.target.value);
-    switch (e.target.value) {
-      case "name":
-        setList(dataByName);
-        break;
-      case "price":
-        setList(dataByPrice);
-        break;
-      case "category":
-        setList(dataByCategory);
-        break;
-      case "availablity":
-        setList(dataByAvailablity);
-        break;
-      default:
-        break;
-    }
-    console.log(dataByAvailablity, dataByCategory, dataByName, dataByPrice);
+    setList(sortObjectArray(data, e.target.value));
   };
 
   return (
@@ -51,7 +31,7 @@ export default function Home() {
           <option value="name">Name</option>
           <option value="price">Price</option>
           <option value="category">Category</option>
-          <option value="availablity">Availablity</option>
+          <option value="available">Availablity</option>
         </select>
       </div>
       {list.map((item, ind) => (

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import Button from "../../components/Button";
 import { CartContext } from "../../utils/context";
-import { dataByName } from "../../utils/data";
+import { data } from "../../utils/data";
 
 export default function ID({ item }) {
   const [qty, setQty] = useState(item.available === 0 ? 0 : 1);
@@ -72,7 +72,7 @@ export default function ID({ item }) {
 export async function getStaticProps({ params }) {
   return {
     props: {
-      item: dataByName.find((elem) => Number(elem.id) === Number(params.id)),
+      item: data.find((elem) => Number(elem.id) === Number(params.id)),
     },
   };
 }
