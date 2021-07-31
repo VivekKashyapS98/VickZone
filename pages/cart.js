@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import Button from "../components/Button";
 import { CartContext } from "../utils/context";
 
 export default function Cart() {
@@ -23,6 +24,24 @@ export default function Cart() {
             <h3 className="text-base font-semibold md:text-lg">
               {"$" + String(Number(elem.item.price) + Number(elem.qty))}
             </h3>
+            <div
+              onClick={() => dispatch({ type: "REMOVE", payload: elem.item })}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </div>
           </div>
         );
       })}

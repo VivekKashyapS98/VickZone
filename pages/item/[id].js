@@ -11,13 +11,11 @@ export default function ID({ item }) {
 
   const contains = () => {
     var found = false;
-    for (var i = 0; i < state.cart.length; i++) {
-      if (state.cart[i].id == item.id) {
-        found = true;
-        break;
-      }
+    var a = state.cart.some((elem) => Number(elem.item.id) === Number(item.id));
+    if (a || !item.available) {
+      found = true;
     }
-    console.log(found);
+    console.log(found, a, state.cart);
     return found;
   };
 
@@ -26,7 +24,7 @@ export default function ID({ item }) {
   };
 
   const handleAddToCart = () => {
-    if (item.available !== 0) {
+    if (contains) {
       dispatch({ type: "ADD", payload: { item: item, qty } });
       router.push("/cart");
     }
@@ -50,7 +48,7 @@ export default function ID({ item }) {
           onChange={setQuantity}
           className="m-2 p-2 w-40 md:w-60 h-8 md:h-10 rounded-full transition-gpu duration-200 ring-gray-200 hover:ring-2 md:hover:ring-4"
         >
-          {item.available === 0 ? (
+          {contains() ? (
             <option value="0">0</option>
           ) : (
             <>

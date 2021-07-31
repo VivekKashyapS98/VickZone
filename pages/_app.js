@@ -2,7 +2,6 @@ import "../styles/globals.css";
 import Layout from "../components/Layout";
 import { useReducer } from "react";
 import { CartContext } from "../utils/context";
-import { dataByName } from "../utils/data";
 
 function reducer(state, action) {
   console.log(action);
@@ -15,7 +14,7 @@ function reducer(state, action) {
       return {
         cart: [
           ...state.cart.filter(
-            (elem) => Number(elem.id) !== Number(action.payload)
+            (elem) => Number(elem.id) !== Number(action.payload.id)
           ),
         ],
       };
