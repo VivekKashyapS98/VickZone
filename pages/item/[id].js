@@ -41,7 +41,7 @@ export default function ID({ item }) {
       </h3>
       <div className="p-4 w-full flex felx-row flex-wrap justify-between items-center">
         <h3 className="text-lg font-semibold md:text-2xl">
-          {item.available ? "In Stock:" + item.available : "Out of stock"}
+          {contains() ? "In Stock:" + item.available : "Out of stock"}
         </h3>
         <select
           value={qty}
