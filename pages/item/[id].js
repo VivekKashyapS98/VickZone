@@ -24,7 +24,7 @@ export default function ID({ item }) {
   };
 
   const handleAddToCart = () => {
-    if (contains) {
+    if (!contains()) {
       dispatch({ type: "ADD", payload: { item: item, qty } });
       router.push("/cart");
     }

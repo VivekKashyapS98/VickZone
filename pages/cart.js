@@ -45,6 +45,9 @@ export default function Cart() {
           </div>
         );
       })}
+      {cart.length > 0 && (
+        <Button onClick={() => alert(JSON.stringify(cart))}>Purchase</Button>
+      )}
     </div>
   );
 }

@@ -14,7 +14,7 @@ function reducer(state, action) {
       return {
         cart: [
           ...state.cart.filter(
-            (elem) => Number(elem.id) !== Number(action.payload.id)
+            (elem) => Number(elem.item.id) !== Number(action.payload.id)
           ),
         ],
       };
