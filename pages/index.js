@@ -1,10 +1,13 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import sortObjectArray from "sort-objects-array";
+import Button from "../components/Button";
 import Card from "../components/Card";
 import { data } from "../utils/data";
 
 export default function Home() {
+  const router = useRouter();
   const [list, setList] = useState(data);
   const [sort, setSort] = useState("name");
 
@@ -37,6 +40,7 @@ export default function Home() {
       {list.map((item, ind) => (
         <Card key={`${item.name}/${ind}`} item={item} />
       ))}
+      <Button onClick={() => router.push("/new-item")}>Add Item</Button>
     </>
   );
 }
